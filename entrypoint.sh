@@ -31,11 +31,15 @@ Xvfb :99 -ac -screen 0 "${XVFB_RES}" -nolisten tcp $XVFB_ARGS &
 XVFB_PROC=$!
 sleep 1
 
-echo "Starting FCBot"
+echo "Starting FCBot as 'uv run python3 -m fcbot $@'"
 echo
 export DISPLAY=:99
 uv run python3 -m fcbot $@
+FCBOT_RC=$?
+echo "FCBot returned ${FCBOT_RC}"
 
 echo
 echo "Stopping Xvfb"
 kill $XVFB_PROC
+
+exit $FCBOT_RC
