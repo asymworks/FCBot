@@ -20,3 +20,38 @@ To use, execute the `fcbot.sh` script from the directory with the FreeCAD projec
 ```shell
 $ ~/fcbot.sh -c fcbot.yaml Project.FCStd
 ```
+
+## Configuration
+
+FCBot is configured using YAML files. An example YAML file with all available options is shown below.
+
+```yaml
+fcbot:
+    version: 1          # This is optional but must be set to 1 if provided
+    log_level: "INFO"   # This accepts Python logging level strings (DEBUG, INFO, WARNING, ERROR, and CRITICAL)
+    output_dir: "."     # All generated files are saved relative to this directory
+
+outputs:
+  - name: STEP Output               # The `name` key is optional and is used in all log messages to identify the step
+    type: step                      # Currently `step`, `stl`, and `pdf` are supported output formats
+    filename: part.step             # The output file name
+    objects:                        # Specify which FreeCAD objects to include in the output
+      - Part                        # This can be a list of object labels, as in this example
+
+  - name: STL Output
+    comment: Output a STL Mesh      # Comments can be provided and are output to the console before the step is run
+    type: stl
+    filename: part.stl
+    objects:
+      shapes: all                   # `objects` can also contain a mapping of `shapes: all` to export all solid bodies
+                                    # Note that for STL outputs, only one object can be output at a time, but this can
+                                    # still be useful for when the project only contains one solid body
+
+  - name: PDF Drawing
+    type: pdf
+    filename: part.pdf
+    objects:
+      pages: all                    # Similar to `shapes: all`, `pages: all` will export all TechDraw Pages into a single
+                                    # merged PDF file.
+
+```
