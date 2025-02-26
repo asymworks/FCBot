@@ -5,11 +5,12 @@ RUN apt-get update \
 	&& pip3 install --break-system-packages uv
 
 ARG FREECAD_PYTHON_VERSION=3.13
-WORKDIR /app
+
 COPY . /app/
 RUN chmod +x /app/entrypoint.sh
 
-RUN echo "${FREECAD_PYTHON_VERSION}" > .python-version \
+RUN cd /app \
+	&& echo "${FREECAD_PYTHON_VERSION}" > .python-version \
 	&& uv venv --python ${FREECAD_PYTHON_VERSION} \
 	&& uv sync
 

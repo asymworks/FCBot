@@ -31,5 +31,5 @@ runs:
     -  ${{ inputs.additional_args }}
     -  ${{ inputs.project }}
 branding:
-  icon: 'cpu'
-  color: 'green'
+  icon: 'settings'
+  color: 'blue'
