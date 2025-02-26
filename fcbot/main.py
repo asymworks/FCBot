@@ -116,6 +116,12 @@ def main():
     if not config:
         sys.exit(2)
 
+    # Patch the Output Directory.
+    # TODO: This is really hacky and should really be handled differently
+    if config.fcbot.output_dir is None and args.output is not None:
+        config.fcbot.output_dir = args.output
+    logging.debug(f'Using output directory {config.fcbot.output_dir}')
+
     # Check Logging Configuration
     if config.fcbot.log_level not in logging.getLevelNamesMapping():
         logger.error(f'Invalid value for "fcbot.log_level": {config.fcbot.log_level}')
