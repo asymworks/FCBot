@@ -1,0 +1,35 @@
+name: 'FreeCAD Bot GitHub Action'
+description: 'Automatically generates documentation and export artifacts from FreeCAD projects'
+author: 'Jonathan Krauss'
+inputs:
+  config:
+    description: 'The FCBot configuration file to use [default: fcbot.yaml]'
+    required: false
+    default: '__SCAN__'
+  dir:
+    description: 'The output directory for generated artifacts [default: .]'
+    required: false
+    default: '.'
+  project:
+    description: 'The FreeCAD Project File (FCStd)'
+    required: true
+  verbose:
+    description: 'Verbosity level [default: 0]'
+    required: false
+    default: '0'
+  additional_args:
+    description: 'Additional arguments to pass to FCBot'
+    required: false
+    default: ''
+runs:
+  using: 'docker'
+  image: Dockerfile
+  args:
+    -  -c ${{ inputs.config }}
+    -  -o ${{ inputs.dir }}
+    -  -v ${{ inputs.verbose }}
+    -  ${{ inputs.additional_args }}
+    -  ${{ inputs.project }}
+branding:
+  icon: 'cpu'
+  color: 'green'
