@@ -12,7 +12,7 @@ FCBot is available as a GitHub/Gitea Action, or can be used locally with Docker.
 $ cat ~/fcbot.sh
 #!/bin/sh
 
-docker run --ti --rm -v $PWD:/workspace ghcr.io/asymworks/fcbot $@
+docker run -ti --rm -v $PWD:/workspace ghcr.io/asymworks/fcbot $@
 ```
 
 To use, execute the `fcbot.sh` script from the directory with the FreeCAD project and FCBot configuration file:
