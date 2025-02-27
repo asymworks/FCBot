@@ -12,6 +12,7 @@ from fcbot.config import FCBotConfigOutput
 
 from .base import OutputRunner
 from .pdf import PdfOutputRunner
+from .screenshot import ScreenshotOutputRunner
 from .shape import StepOutputRunner, StlOutputRunner
 
 #: Mapping of `type` parameter to `OutputRunner` subclass
@@ -19,6 +20,7 @@ OUTPUT_CLASSES = {
     'pdf':  PdfOutputRunner,
     'step': StepOutputRunner,
     'stl':  StlOutputRunner,
+    'screenshot': ScreenshotOutputRunner,
 }
 
 def load_runner(

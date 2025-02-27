@@ -67,7 +67,7 @@ fcbot:
 
 outputs:
   - name: STEP Output               # The `name` key is optional and is used in all log messages to identify the step
-    type: step                      # Currently `step`, `stl`, and `pdf` are supported output formats
+    type: step                      # Currently `step`, `stl`, `screenshot`, and `pdf` are supported output formats
     filename: part.step             # The output file name
     objects:                        # Specify which FreeCAD objects to include in the output
       - Part                        # This can be a list of object labels, as in this example
@@ -87,5 +87,36 @@ outputs:
     objects:
       pages: all                    # Similar to `shapes: all`, `pages: all` will export all TechDraw Pages into a single
                                     # merged PDF file.
+
+  - name: FC Render
+    comment: Output a FreeCAD Screenshot
+    type: screenshot                # Type `screenshot` outputs use the built-in `screenshot` functionality of FreeCAD
+    filename: part.png              # Any file extension supported by FreeCAD can be specified here
+    objects:
+      - Part
+    options:
+      resolution: [2048, 2048]      # Specify the X and Y resolution for the export
+      camera: orthographic          # Camera mode can be `orthographic` or `perspective`
+      view: isometric               # Multiple view modes are possible, including a custom camera position (see below)
+      background: transparent       # Other color names can be passed here
+
+
+  - name: FC Render
+    comment: Output a FreeCAD Screenshot
+    type: screenshot
+    filename: part-custom-view.png
+    objects:
+      - Part
+    options:
+      resolution: [2048, 2048]
+      camera: orthographic
+      view:                         # Specify the camera position and view angle
+        x: 11.5
+        y: -20
+        z: 20
+        yaw: 30
+        pitch: 0
+        roll: 55
+      background: transparent
 
 ```
